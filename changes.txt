@@ -1,0 +1,570 @@
+ChangeLog for Bubble Mod 
+------------------------
+- bugfix, + enhancement, = RELEASE
+* known bug, ? possible planned feature
+-------------------------------------------------
+
+? Bots?
+
+? Help system?
+
+? Random rune (not what it sounds like)
+
+? Flamethrower rune
+
+? Heat seeker rune
+
+* changing bm_nextmap to an invalid map will cause the server to stay
+  in intermission mode until someone changes the map by hand. 
+
+* Some weapons log damage location as "generic"
+  crowbar (only sometimes?!), flying_crowbar, squidspit, snarks...
+
+-------------------------------------------------
+= Build 2.2.2  
+
+* Crossbow THWAP sound effect is back.
+
+* Fixed logging error with GetAuthID
+  (Steam clients)
+
++ Snark Launcher mode for the hornetgun
+
++ multizapper mode for the hornetgun
+
++ bm_thrust makes the bubblegun into a sort of hover
+  jet pack. (experimental, still has problems)
+  default is 0. (off) Try values around 42-45. 
+
++ llama / unllama commands
+
++ bm_rune_rand, and bm_runemask for runes that spawn as random types.
+
++ leetspeak client command. 
+
++ Armor rune now makes BubbleGun give armor for 25 ammo.
+
++ Health rune now makes BubbleGun give health for 25 ammo.
+
++ Log opponent gun. 
+
++ bm_matchkills
+
++ Spam flood autokick.
+  bm_spamlimit sets max messages / second.  
+  bm_antispam enables it.
+
++ Runes are now logged on kill lines as properties.
+  ie: (rune "crowbar")
+
+* fixed bug when no votes are cast in a vote. 
+
++ bm_votetime
+
++ "info" server command. 
+
++ Spectator mode instructions are now always visible. 
+
+- Added weapon info for tripmines. 
+
++ Persistance for spawn kills, and type kills.
+
++ multi-kill notifications. 
+
++ "match" kills flag in logs.
+
++ "Spawn" indicator countdown.
+
+- The armor value on damage messages was sometimes wrong. 
+
++ bm_bantime
+
++ bm_maxtypekills
+
++ bm_maxspawnkills
+
++ new client console command. "locate"
+  Turns on a locator that shows you your world position
+  and facing. 
+
++ Typers and Spawns show on player ID.
+
++ Spawns now use the holographic effect.
+
++ New server command:
+  replace <entity> <entity>
+  Will replace all instances of the first entity with the second.
+  Any weapon_ or ammo_ entity can be used as well as item_healthkit
+  item_battery or item_longjump.
+
++ New server command: 
+  remove <entity>
+  Will remove the specified entity from the map. 
+  Any weapon_ or ammo_ entity can be used as well as item_healthkit
+  item_battery or item_longjump.
+
++ New server command: 
+  create <entity> <xpos> <ypos> <zpos> <y angle>
+  Create a spceified entity at the supplied coords and Y angle. 
+  Any weapon_ or ammo_ entity can be used as well as item_healthkit
+  item_battery or item_longjump.
+  Setting <y angle> to a negative number will randomize the facing of
+  the entity. 
+
++ After loading a map and executing the server/listenserver.cfg files,
+  The game will execute a map specific .cfg file called mapname.cfg
+  located in the maps folder. This can be used to customize server
+  settings on a per map basis. 
+
++ Type kill detection. "bm_typekills 0" enables type kill detection.
+  (enabled by default) If a person faces a wall for 4 seconds 
+  without moving, firing, switching weapons, picking up weapons,
+  pickuping ammo, or any other item,  
+  they will start to glow. If they are killed at this stage the
+  kill will be negated, a nasty message will be broadcast, and
+  the victim's weapon will not drop.   
+
++ Crossbow damage is now an optional mod.
+  bm_xbow_mod 0: Crossbow does 120 damage. 
+  bm_xbow_mod 1: Crossbow does 90 damage. 
+  Defaults to ON. 
+
++ "vote extend" option to extend a map by 25 kills and
+  30 mins. 
+
+* Rewrote weapon and rune messages for clairty
+
+* Fixed precache error in ammo_9mmbox when used in bm_ammo.
+
++ Fast shotgun mod via bm_shotty_mod. (faster fire and reload)
+  bm_shotty_mod 0: Normal shotgun.
+  bm_shotty_mod 1: Fast fire rate and fast reload. 
+  Defaults to OFF.
+
++ Damage messages are optional via bm_dmg_messages.
+  bm_dmg_messages 0: Do not show damage messages. 	 
+  bm_dmg_messages 1: Show damage messages. 	
+  Defaults to ON. 
+
+-------------------------------------------------
+= Build 2.2.1  
+
++ crowbar rune throws a little slower.
+
++ bubblegun now heals 70 points.
+
++ dropped weapons now look like their model.
+
++ All weapon mods are now optional. 
+
++ bm_ammo is a semicolon delimited list of start ammo.
+  For each name in the list, one clip of the appropriate ammo 
+  will be added. Valid, case sensitive ammo names are:
+
+  9mmclip (9mm sized for glock)
+  mp5clip (9mm sized for MP5) 
+  9mmbox (200 9mm rounds)
+  357 (magnum ammo)
+  buckshot (shotgun ammo)
+  ARgrenades (contact grenades for the MP5)
+  gaussclip (uranium sized for tau)
+  egonclip (uranium sized for egon)
+  rpgclip (rockets)
+  crossbow (crossbow bolts)
+
+  Other types of ammo like tripmines, snarks, and satchels can be given
+  by adding multiple weapons to bm_start_weapons.
+
+  Example: bm_ammo "ARgrenades;9mmclip;9mmclip;buckshot"
+
+  Wil give each startiung player 2 extra clips for the glock, a pack
+  of contact grenades, and a box of buckshot.
+
++ bm_guns is a semicolon delimited list of start weapons.
+  Valid, case sensitive weapon names are:
+
+  crowbar
+  9mmhandgun
+  glock
+  357
+  python
+  9mmAR
+  mp5
+  shotgun
+  egon (gluon)
+  gauss (tau)
+  rpg
+  hornetgun
+  tripmine
+  satchel
+  handgrenade
+  snark
+  crossbow
+
+  The last weapon in the list will be selected at spawn. 
+  The second to last weapon will be the previous weapon. 
+
+  Example: bm_guns "crowbar;egon;357;9mmhandgun"
+
+  The player will start with the crowbar, 357, gluon, and glock with the glock
+  selected and the 357 on the previous weapon key. 
+
++ Simplified Messaging System.
+
++ Improved Spawn Kill code. Should work with any weapon combo
+  now.
+
++ Added new spawn effects to spawning players.
+
++ HLTV support
+
++ Voice comm support
+
+- Team names on team scoreboard work (fixed Valve bug!)
+
+-- Removed crowbar madness mode
+
+-- Removed bm_trips
+
+-- Removed Tourney Mode
+
++ New SDK 2.2 code merge. Rewrote entire mod in the 2.2 SDK.
+
+-------------------------------------------------
+= Build 10927 Release
+  (Last SDK 2.1 version)
+
++ Now detects and logs HLHack 1.3
+
++ New squidspit effects
+
+-------------------------------------------------
+= Build 10923 Release
+
+- 1108 patch bug fixes:
+
+	* crosbow zoom
+	* 357 zoom
+	* mp5, shotgun, and python bullet spread
+	* scoreboard hostname
+	* scoreboard teamnames 
+	* scoreboard team names after model change. (Valve bug!)
+	* Fixed CVAR namespace. Most cvar ames have changed:
+
+		bm_ver
+		bm_plat
+		bm_trips
+		bm_freezetime
+		bm_spawnkilltime
+		bm_spawnmines
+		bm_spawnsatchels
+		bm_voting
+		bm_cbmad
+		bm_rpg_mod
+		bm_mp5_mod
+		bm_cbar_mod
+		bm_tau_mod
+		bm_snarks_mod
+		bm_gluon_mod
+		bm_hornet_mod
+		bm_trip_mod
+		bm_rune_cbar
+		bm_rune_cbar_t
+		bm_rune_cbar_r
+		bm_rune_gren
+		bm_rune_gren_t
+		bm_rune_gren_r
+		bm_rune_357
+		bm_rune_357_t
+		bm_rune_357_r
+		bm_rune_health
+		bm_rune_health_t
+		bm_rune_health_r
+		bm_rune_armor
+		bm_rune_armor_t
+		bm_rune_armor_r
+		bm_rune_shotty
+		bm_rune_shotty_t
+		bm_rune_shotty_r
+
++ Tweaked the logging to make it more compatable with broken 
+  log parsers. (st00pid log parsers)  
+
++ Spectators are now listed in their own catagory in team games. 
+
++ Spawn kills no longer count as a kill or a death.
+
++ If a player has a pin pulled on a hand grenade and is killed, the grenade
+  will drop to the ground and explode. Another player can then pick up the 
+  pack of hand grenades without killing themself. 
+
++ Tourney Mode fixed! (read: functional, still needs work) 
+  New server commands:
+
+   starttourney - Puts the server into tourney mode and intermission phase.
+                  In intermission phase, all players are forced to spawn, and
+                  the server will be running in crowbar madness mode with 5 
+                  crowbar runes. A HUD display will show the parameters for 
+                  the next match and who will be playing. 
+
+   stoptourney - Disables tourney mode and returns the server back to normal
+                 gameplay. 
+
+   settime (mins) - Set the time limit for the next match.
+
+   setfrags (frags) - Set the frag limit for the next match.
+
+   setmap (map name) - Choose the map for the next match.
+
+   spectator (UID) - Puts the player specified by UID into the spectator list.
+                     By default all players are spectators. If the server is 
+                     in Intermission phase the player will be removed from the
+                     contestant list. If the server is in match phase, the 
+                     player will be removed from the game and become a 
+                     spectator. 
+
+   contestant (UID) - Puts the player specified by UID into the contestant 
+                      list. If the server is in intermission phase, the 
+                      player will be listed in the contestants list. If 
+                      the server in in match phase, the player will be 
+                      spawned into the game.
+
+   listc - Prints the contestant list. If a player name is listed as 
+            "no player found" then either that player has dropped from the 
+            game, or they have not joined yet. 
+
+   cleanc - Sometimes bogus players get stuck in the contestant list. This
+            command is a hack to clean out defunct players from the contestant 
+            list. If the server is hanging, waiting for players that will never
+            arrive, or if you can't remove a player from the list (bad UID)
+            executing this server command will fix it. This is a kludge until I
+            can come up with a better solution. 
+
+   startmatch - Will begin the next match. All contestant controls are 
+                disabled until all other contestants have joined. The game 
+                the begins after a 10 second countdown. During the match, 
+                specators will be able to see ALL chat messages (even in other
+                teams), but contestants will only be able to see the chat from
+                other contestants. Everyone can still read admin chat.
+
++ Crowbar madness mode. All weapons except the crowbar and bubblegun are 
+  replaced by crowbars. All ammo is replaced by uranium packs. 
+  bmod_cbmad 0/1. 
+
++ Next map name is now visible on observer mode message.
+
++ Map voting. start with "rockthevote" vote with "vote <mapname>"
+  can be disabled with bmod_allowvote 0/1.
+
++ Added client "say" commands:
+  "timeleft" - Prints the time remaining on the current map. 
+
+  "fragsleft" - Prints the number if frags the lead player (or team) needs 
+  to win. 
+
+  "map" - Prints the current map name and what the next map will be. 
+
+  "status" - Prints timeleft, fragsleft, current map, and next map all on 
+  one line. 
+
++ SpeakAll function to broadcast vox to all players. Added various sayings 
+  for game events. 
+
++ Secondary fire on tripmines will plant trip flash mines. 
+  Can be disabled with bmod_tripmines_mod.
+
++ Spawn satchels will auto detonate.
+  Can be turned off with bmod_allowspawnsatchels 0/1.
+
++ Changed the health and armor rune messages to be a little more 
+  descriptive. 
+
++ Zapgun now electrifies water. 
+
++ Added some effects to the Zapgun.
+
++ Zapgun now fires one bolt instead of two. This fixes some confusion with 
+  the damage indicators. 
+    
++ When a player disconnects, all satchels, tripmines, and snark trips owned 
+  by that player will be removed from the game.
+
++ Added bmod_platform var. 
+
++ Enhanced chase cam a tiny bit. It should follow players a little smoother
+  for high latency connections.             
+        
+-------------------------------------------------
+= Build 10713 Release 
+
+- Rune and info messages can now be displayed at the same time. 
+
++ Spawn mines will auto detonate when they arm.
+  Can be turned off with bmod_allowspawnmines.
+
++ Added damage messages for players. Players can now see damage they deal 
+  and is delt to them with headshot info.
+
++ Current map name is now visible on the spectator mode screen. 
+
++ added admin say and whisper commands. 
+
++ default spawn kill time is now 10 seconds. 
+                 
+- Fixed the spawn killer when target is firing like a mad man bug. 
+  This was a Linux only bug.I forgot to add the modified glock code to the 
+  Linux source tree. DOH! 
+
++ Hornetgun mod optional. CVAR: bmod_hornet_mod (1 = enable, 0 = disable)
+
+- Broke the zapgun hit location log in last relase. Fixed. 
+
+-------------------------------------------------
+= Build 10519 Release 
+
+- Fixed "reliable overflow" for chase cam observers. 
+
++ Added class monstermaker. Snark Pit works again. 
+
++ Snarks mod optional. CVAR: bmod_snarks_mod (1 = enable, 0 = disable) 
+
++ Tau mod optional. CVAR: bmod_tau_mod (1 = enable, 0 = disable) 
+
++ Crowbar mod optional. CVAR: bmod_crowbar_mod (1 = enable, 0 = disable) 
+  disables the flying_crowbar.
+
+- Fixed some bugs in the button detection code for observers. Since observers 
+  are dead most of the time, the m_afButtonLast value was not getting set. 
+  This was breaking the Jump and Alt Fire keys in observer mode sometimes 
+  preventing players from switching modes and/or switching players.
+
+-------------------------------------------------
+= Build 10516 Release 
+
++ bmod_spawnkilltime. Sets length of time that is considered a spawn kill. 
+  Spawn kills are now logged. Default is 5 seconds.  
+
++ kills now log body hit location. 
+
+- Remove some of the Obs mode PVS code in SetupVisibility(). I think this will 
+  fix the mysterious "I can't see any entities" bug. 
+
+- All weapon boxes now look like crowbars if they have a crowbar packed in them.
+  This solves the effect of having weapons boxes that nobody can appear to pick 
+  up. 
+  (I'm thinking of making weapon boxes always look like their weapon.. hmmm)
+
+- Fixed the Zoom FOV spectator bug. 
+
++ Added a cvar to change the freeze time of the freeze ray. 
+  CVAR: bmod_freezetime (in seconds, default = 4.5 seconds)
+
++ Freeze Ray. Hornet now has three fire modes. Spit, Lightning, and Freeze Ray.
+  Upped ammo to 12 hornets.
+  Spit uses 3, zap uses 4 and freeze uses 12. 
+
++ Trips optional. (For K9).  CVAR: bmod_tripmines (1 = enable, 0 = disable)
+
++ RPG mod optional (For K9). CVAR: bmod_rpg_mod (1 = enable, 0 = disable) 
+
++ mp5 mod optional (For K9). CVAR: bmod_mp5_mod (1 = enable, 0 = disable)  
+
++ Added cvars for all the runes. You can set number of runes, lifespan, and 
+  respawn time. 
+
++ Increased the MOTD size to 960 characters. 
+
++ You can now hurt yourself with the flying_crowbar.
+
++ Shotgun rune. 3 x speed for the shotgun, with clip reload. 30 seconds / 
+  respawn 3 mins. 
+
++ Added battery and health runes. Gives 2 x healing and armor. 30 seconds / 
+  respawn 1 min. 
+
++ Added 357 rune. does 2.5 times damage of regular 357 ammo. 30 seconds / 
+  respawn 1 min.
+
++ Added the Mega Grenade rune. Does 150 points of radius damage. lasts 30 
+  seconds, respawns after 2 mins. 
+
++ Logs now differentiate between contact "grenades" and "hand_grenades." 
+
++ Added the Super Crowbar rune. It makes the primary fire insta kill
+  and secodary fire throws unlimited flying_crowbars. Last 30 seconds, 
+  respawns after 1 min. 
+
++ Added support for runes. 
+
+- Fixed spinning corspes. 
+
++ Brought logging up to 1106 standard. This is still not 100%
+  Features to add: 
+  Spawn kill info?
+  Damage inflicted? (location?)
+
+- Fixed the long jump animation bug.
+
+- Made cvar changes according to Eric for 1106. 
+
+- Hornet gun would sometimes get stuck with zero ammo making it
+  unselectable. 
+
+- Totally rewrote the flying_crowbar code. Hopefully
+  this will solve some of the crash bugs. The new code
+  is much cleaner and logical. As a side effect, thrown
+  crowbars on the ground will disappear after lying there for 
+  2 minutes. They also bounce off of structures better. The old
+  code would sometimes get crowbars stuck in walls and other odd
+  effects.
+
++ Player model in Player ID.
+
++ Chase cam Player ID/Health/Armor/Model.
+
+- Repackaged the installation of the mod. Having the mod in its own
+  directory caused too many problems with client configs and the
+  way the game is reported to the master server. A side effect is that
+  the death notice icons are lost. 
+
+-------------------------------------------------
+= Build 10208 Release - First Public Release!
+
+* flying_crowbars can still sometimes get stuck in mid air. 
+
++ WIN32: Added death notice sprites for flying_crowbar, zapgun, and squidspit.
+
++ WORKING Win32 port! Next release will be public. 
+
+- Fixed bug where colliding flying_crowbars would sometimes spawn multiple
+  crowbar weapons. This would sometimes crash the server. 
+
+- flying_crowbar now reacts correctly when hitting other flying_crowbars in 
+  mid air. 
+
+- Fixed zapgun console name bug
+
+-------------------------------------------------
+= Build 10125 Release
+
++ squidspit dmg lowered to 30, velocity increased to 1100
+
+- squidspit no longer fires underwater
+
+- squidspit & zapgun victims now bleed when hit
+
+- Fixed aming bug for spuidspit and zapgun
+
++ zapgun leavs a scorch mark 
+
++ squidspit hitbox larger (6x6x6 cube to 8x8x8 cube)
+
++ flying_crowbar hitbox larger (now 8x8x8 cube)
+
++ zapgun victims now always gib when killed
+
++ Changed "hornetgun" to "zapgun"
+
+-------------------------------------------------
+= Build 10122 Release. 
+  (previous changlog lost)
